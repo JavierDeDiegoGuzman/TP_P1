@@ -3,6 +3,7 @@ package es.ucm.tp1.control;
 import java.util.Scanner;
 
 import es.ucm.tp1.logic.Game;
+import es.ucm.tp1.view.GamePrinter;
 
 public class Controller {
 
@@ -27,18 +28,48 @@ public class Controller {
 	private Game game;
 
 	private Scanner scanner;
+	
+	private GamePrinter printer;
 
 	public Controller(Game game, Scanner scanner) {
 		this.game = game;
 		this.scanner = scanner;
+		this.printer = new GamePrinter(this.game);
 	}
 
 	public void printGame() {
-		System.out.println(game);
+		System.out.println(printer);
+	}
+	
+	public void takeCommand() {
+		String command;
+		System.out.print(PROMPT);
+		command = this.scanner.nextLine();
+		System.out.println(command);
+		
+		
+	}
+	
+	public void update() {
+		this.game.moveObjects();
+		if(this.game.getObstacleList().obstacleInPosition(0, this.game.getPlayer().getY())) {
+			this.game.killPlayer();
+		}
+		this.game.removeDeadObjects();
+	}
+	
+
+	public void printEndMessage() {
+		System.out.println(printer.endMessage());
 	}
 
 	public void run() {
-		// TODO fill your code
+		do {
+			printGame();
+			takeCommand();
+			update();
+			System.out.println(!this.game.gameover());
+		}while(!this.game.gameover());
 	}
 
 }

@@ -7,7 +7,7 @@ Coins: 5
 Cycle: 0
 Total obstacles: 13
 Total coins: 14
-Ellapsed Time: 0,00 s
+Elapsed Time: 0.00 s
   ═════════════════════════════════════════════════════════════════
                                                       ░            
    ─────── ─────── ─────── ─────── ─────── ─────── ─────── ─────── 
@@ -22,12 +22,11 @@ Available objects:
 [Car] the racing car
 [Coin] gives 1 coin to the player
 [Obstacle] hits car
-
 Command > 
 [DEBUG] Executing: h
 Available commands:
 [h]elp: show this help
-[i]nfo: prints gameobjet info
+[i]nfo: prints gameobject info
 [n]one | []: update
 [q]: go up
 [a]: go down
@@ -38,7 +37,7 @@ Command >
 [DEBUG] Executing: H
 Available commands:
 [h]elp: show this help
-[i]nfo: prints gameobjet info
+[i]nfo: prints gameobject info
 [n]one | []: update
 [q]: go up
 [a]: go down
@@ -51,12 +50,11 @@ Available objects:
 [Car] the racing car
 [Coin] gives 1 coin to the player
 [Obstacle] hits car
-
 Command > 
 [DEBUG] Executing: HeLP
 Available commands:
 [h]elp: show this help
-[i]nfo: prints gameobjet info
+[i]nfo: prints gameobject info
 [n]one | []: update
 [q]: go up
 [a]: go down
@@ -69,13 +67,14 @@ Available objects:
 [Car] the racing car
 [Coin] gives 1 coin to the player
 [Obstacle] hits car
-
 Command > 
 [DEBUG] Executing: z
 [ERROR]: Unknown command
+
 Command > 
 [DEBUG] Executing: X
 [ERROR]: Unknown command
+
 Command > 
 [DEBUG] Executing: e
 [GAME OVER] Player leaves the game

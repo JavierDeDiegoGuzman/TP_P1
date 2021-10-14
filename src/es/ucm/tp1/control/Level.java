@@ -45,4 +45,17 @@ public enum Level {
 		}
 		return buffer.toString();
 	}
+
+	public int getVisibility() {
+		return this.visibility;
+	}
+	public int getWidth() {
+		return this.width;
+	}
+	public int getLenght() {
+		return this.length;
+	}
+	public double getObstacleFrecuency() {
+		return this.obstacleFrequency;
+	}
 }

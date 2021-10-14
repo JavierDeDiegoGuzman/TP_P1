@@ -1,7 +1,8 @@
 package es.ucm.tp1.view;
 
-import es.ucm.tp1.utils.StringUtils;
 import es.ucm.tp1.logic.Game;
+import es.ucm.tp1.logic.gameobjects.Obstacle;
+import es.ucm.tp1.utils.*;
 
 public class GamePrinter {
 
@@ -15,68 +16,94 @@ public class GamePrinter {
 
 	private static final int MARGIN_SIZE = 2;
 
-	private Game game;
+	private static final String CRASH_MSG = String.format("Player crashed!%n");
 
-	private int numRows;
+	private static final String WIN_MSG = String.format("Player wins!%n");
 
-	private int numCols;
+	private static final String DO_EXIT_MSG = "Player leaves the game";
+
+	private static final String GAME_OVER_MSG = "[GAME OVER] ";
+
+	private static final String DISTANCE_MSG = "Distance: ";
+
+	private static final String COINS_MSG = "Coins: ";
+
+	private static final String CYCLE_MSG = "Cycle: ";
+
+	private static final String TOTAL_OBSTACLES_MSG = "Total obstacles: ";
+
+	private static final String TOTAL_COINS_MSG = "Total coins: ";
+
+	private static final String ELAPSED_TIME_MSG = "Elapsed Time: ";
+
+	private static final String NEW_RECORD_MSG = "New record!: ";
+
+	private static final String RECORD_MSG = "Record: ";
+
+	private static final String NEW_LINE = System.lineSeparator();
 
 	private String indentedRoadBorder;
 
-	private String indentedLlanesSeparator;
+	private String indentedLanesSeparator;
 
 	private String margin;
 
-	private String[][] board;
-	
-	public GamePrinter(Game game, int cols, int rows) {
+	private Game game;
+
+	public GamePrinter(Game game) {
 		this.game = game;
-		this.numRows = rows;
-		this.numCols = cols;
 
 		this.margin = StringUtils.repeat(SPACE, MARGIN_SIZE);
 
-		String roadBorder = ROAD_BORDER_PATTERN + StringUtils.repeat(ROAD_BORDER_PATTERN, (CELL_SIZE + 1) * numCols);
+		String roadBorder = ROAD_BORDER_PATTERN + StringUtils.repeat(ROAD_BORDER_PATTERN, (CELL_SIZE + 1) * game.getVisibility());
 		this.indentedRoadBorder = String.format("%n%s%s%n", margin, roadBorder);
 
 		String laneDelimiter = StringUtils.repeat(LANE_DELIMITER_PATTERN, CELL_SIZE);
-		String lanesSeparator = SPACE + StringUtils.repeat(laneDelimiter + SPACE, numCols - 1) + laneDelimiter + SPACE;
+		String lanesSeparator = SPACE + StringUtils.repeat(laneDelimiter + SPACE, game.getVisibility() - 1)	+ laneDelimiter + SPACE;
 
-		this.indentedLlanesSeparator = String.format("%n%s%s%n", margin, lanesSeparator);
-
+		this.indentedLanesSeparator = String.format("%n%s%s%n", margin, lanesSeparator);
 	}
 
-	private void encodeGame(Game game) {
-		// TODO fill your code
+	protected String getInfo() {
+		return this.game.getInfo();
 	}
 
 	@Override
 	public String toString() {
-		encodeGame(game);
-		
 		StringBuilder str = new StringBuilder();
 
 		// Game Status
-		str.append(game.getGameStatus());
 
+		//str.append(getInfo());
+
+		
 		// Paint game
 
 		str.append(indentedRoadBorder);
 
 		String verticalDelimiter = SPACE;
 
-		for (int y = 0; y < numRows; y++) {
+		for (int y = 0; y < game.getRoadWidth(); y++) {
 			str.append(this.margin).append(verticalDelimiter);
-			for (int x = 0; x < numCols; x++) {
-				str.append(StringUtils.centre(board[y][x], CELL_SIZE))
-						.append(verticalDelimiter);
+			for (int x = 0; x < game.getVisibility(); x++) {
+				str.append(StringUtils.centre(game.positionToString(x, y), CELL_SIZE)).append(verticalDelimiter);
 			}
-			if (y < numRows - 1) {
-				str.append(this.indentedLlanesSeparator);
+			if (y < game.getRoadWidth() - 1) {
+				str.append(this.indentedLanesSeparator);
 			}
 		}
 		str.append(this.indentedRoadBorder);
 
 		return str.toString();
 	}
+
+	public String endMessage() {
+
+		String s = GAME_OVER_MSG;
+
+		// TODO your code here
+
+		return s;
+	}
+
 }
